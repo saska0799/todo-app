@@ -1,9 +1,8 @@
 import { useContext, useMemo, useEffect, useState, useCallback } from "react";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import ModalContext from "../../context/modal/ModalContext";
-import HeaderImg from "../../assets/header.jpg";
+import { fetch } from "../../utils/fetch";
 import { generateRandomNumber } from "../../utils/randomNumber";
-import { formatDate } from "../../utils/formatDate";
 
 const Header = () => {
   const [quotes, setQuotes] = useState([]);
@@ -14,11 +13,10 @@ const Header = () => {
     () => generateRandomNumber(quotesLength),
     [quotesLength]
   );
-  const formattedDate = formatDate();
 
   const fetchQuotes = useCallback(async () => {
-    const res = await fetch("quotes.json");
-    const data = await res.json();
+    const data = await fetch("quotes.json");
+
     setQuotes(data.quotes);
   }, []);
 
@@ -27,25 +25,16 @@ const Header = () => {
   }, [fetchQuotes]);
 
   return (
-    <header>
-      <img
-        src={HeaderImg}
-        alt="header anime wallpaper"
-        className="h-[80vh] w-full object-cover position-center absolute"
+    <header className="h-[22vh] flex justify-between items-center bg-pink-500 sm:px-20 px-8">
+      <AiOutlinePlusCircle
+        className="sm:w-16 w-10 h-auto cursor-pointer"
+        color="white"
+        onClick={() => modalDispatch({ type: "OPEN_MODAL", payload: true })}
       />
-      <div className="h-[80vh] relative flex flex-col justify-between md:p-24 sm:p-16 p-8">
-        <AiOutlinePlusCircle
-          className="md:w-[5rem] w-[3rem] h-auto"
-          color="white"
-          onClick={() => modalDispatch({ type: "OPEN_MODAL", payload: true })}
-        />
-        <div className="flex justify-between items-center text-slate-200 lg:text-4xl md:text-3xl sm:text-2xl text-xl">
-          <div>{formattedDate}</div>
-          <h3 className="w-[70%]  text-end">
-            {quotes && quotes[randomNumber]}
-          </h3>
-        </div>
-      </div>
+
+      <h3 className=" w-[70%] text-end text-slate-200 lg:text-4xl md:text-3xl sm:text-2xl text-lg">
+        {quotes && quotes[randomNumber]}
+      </h3>
     </header>
   );
 };

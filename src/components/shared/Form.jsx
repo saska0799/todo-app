@@ -1,7 +1,6 @@
 import { useContext, useRef } from "react";
 import { AiOutlineCloseSquare } from "react-icons/ai";
 import { v4 as uuid } from "uuid";
-import { formatDate } from "../../utils/formatDate";
 import ModalContext from "../../context/modal/ModalContext";
 import TodoContext from "../../context/todo/TodoContext";
 
@@ -13,12 +12,9 @@ const Form = () => {
   const titleRef = useRef();
   const descriptionRef = useRef();
   const urgentRef = useRef();
-  const deadlineRef = useRef();
 
   const formSubmit = (e) => {
     e.preventDefault();
-
-    const formattedDeadline = formatDate(deadlineRef.current.value);
 
     todoDispatch({
       type: "ADD_TODO",
@@ -26,8 +22,8 @@ const Form = () => {
         id,
         title: titleRef.current.value,
         description: descriptionRef.current.value,
-        urgent: urgentRef.current.value,
-        deadline: formattedDeadline,
+        urgent: urgentRef.current.checked,
+        createdAt: new Date(),
       },
     });
 
@@ -65,19 +61,9 @@ const Form = () => {
           required
         />
       </div>
-      <div className="flex justify-between my-5">
-        <div className="flex justify-center items-center">
-          <label>Urgent?</label>
-          <input type="checkbox" className="ml-5 rounded-lg" ref={urgentRef} />
-        </div>
-        <input
-          type="date"
-          name="date"
-          id="date"
-          className="p-3 rounded-lg"
-          ref={deadlineRef}
-          required
-        />
+      <div className="flex items-center mb-10">
+        <label>Urgent?</label>
+        <input type="checkbox" className="ml-5 rounded-lg" ref={urgentRef} />
       </div>
       <button className=" p-3 rounded-lg bg-slate-500">Submit</button>
     </form>
