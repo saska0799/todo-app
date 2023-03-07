@@ -25,10 +25,9 @@ const Header = () => {
   }, [fetchQuotes]);
 
   return (
-    <header className="h-[22vh] flex justify-between items-center bg-pink-500 sm:px-20 px-8">
+    <header className="h-[22vh] flex justify-between items-center bg-[#CE1F6A] sm:px-20 px-8">
       <AiOutlinePlusCircle
-        className="sm:w-16 w-10 h-auto cursor-pointer"
-        color="white"
+        className="sm:w-16 w-10 h-auto cursor-pointer fill-[#FFE3FE] hover:fill-[#ffffff] transition-all"
         onClick={() => modalDispatch({ type: "OPEN_MODAL", payload: true })}
       />
 

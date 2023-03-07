@@ -4,7 +4,7 @@ import ModalContext from "./context/modal/ModalContext";
 import Header from "./components/shared/Header";
 import Modal from "./components/shared/Modal";
 import Overlay from "./components/shared/Overlay";
-import TodoList from "./components/TodoList/TodoList";
+import TodoList from "./components/todos/TodoList";
 
 const App = () => {
   const { modalState } = useContext(ModalContext);

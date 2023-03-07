@@ -32,14 +32,13 @@ const Form = () => {
 
   return (
     <form
-      className="flex flex-col bg-slate-200 md:w-[25rem] w-[20rem] rounded-lg p-5"
+      className="flex flex-col bg-[#FFE3FE] text-[#26001B] md:w-[25rem] w-[20rem] rounded-lg p-5"
       onSubmit={formSubmit}
     >
       <div className="flex justify-between my-5">
         <h2 className="text-3xl">Add a task</h2>
         <AiOutlineCloseSquare
-          className=" w-[2.5rem] h-auto"
-          color="gray"
+          className="cursor-pointer w-[2.5rem] h-auto fill-[#26001B] hover:fill-[#CE1F6A] transition-all"
           onClick={() => modalDispatch({ type: "CLOSE_MODAL", payload: false })}
         />
       </div>
@@ -65,7 +64,9 @@ const Form = () => {
         <label>Urgent?</label>
         <input type="checkbox" className="ml-5 rounded-lg" ref={urgentRef} />
       </div>
-      <button className=" p-3 rounded-lg bg-slate-500">Submit</button>
+      <button className="p-3 rounded-lg bg-[#CE1F6A] text-white hover:bg-[#FF005C]">
+        Submit
+      </button>
     </form>
   );
 };
